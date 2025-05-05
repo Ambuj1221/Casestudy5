@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock Tracking Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-left">
+        <button id="login-smtp-btn">Login using SMTP</button>
+        <h1>Stock Tracking Dashboard</h1>
+      </div>
+      <button id="theme-toggle">Toggle Dark/Light Mode</button>
+    </header>
+
+    <div class="dashboard">
+      <div class="zerodha-style">
+        <h2>Zerodha Style</h2>
+        <div id="zerodha-stock-updates" class="stock-updates"></div>
+      </div>
+      <div class="motilal-oswal-style">
+        <h2>Motilal Oswal Style</h2>
+        <div id="motilal-stock-updates" class="stock-updates"></div>
+      </div>
+    </div>
+
+    <div class="news-section">
+      <h2>Latest Stock News</h2>
+      <ul id="news-list">
+        <li>Image for Bhavish eyes a big shift as Ola brand may be on the move to family.</li>
+        <li>Spain’s nationwide blackout a wake-up call for India. JSW's big Bhushan loss gets govt busy for response. It’s a buy-on-dip rather than sell-on-rise market now.</li>
+        <li>Swiggy jumps while Zomato drops a bolt from the blue.</li>
+        <li>The Sensex rose over 350 points, while the Nifty climbed above 24,450, driven by gains in stocks like Tata Motors and Adani Ports.</li>
+        <li>IT and FMCG sectors led the gains, with notable performances from companies such as Asian Paints and Bajaj Finserv.</li>
+        <li>Analysts recommend Varun Beverages and JSW Infrastructure, citing strong Q1 performance and strategic growth plans.</li>
+        <li>Experts Ankush Bajaj and Raja Venkatraman suggest stocks like Adani Ports and Reliance Industries as favorable buys for the day.</li>
+        <li>Shares rallied 8% over two days following robust Q4 results and increased cargo volumes.</li>
+        <li>The stock surged 5% after reporting a strong rise in profit after tax and revenue in Q4.</li>
+        <li>Kotak Mahindra Bank: Shares fell 4% as Q4 profits dropped 14% year-on-year, prompting some analysts to suggest selling.</li>
+      </ul>
+    </div>
+
+    <!-- Portfolio Analysis Section -->
+    <div class="portfolio-section">
+      <div class="portfolio-box zerodha-portfolio">
+        <h2>Zerodha Portfolio Analysis</h2>
+        <ul>
+          <li><strong>Equity:</strong> ₹1,25,000</li>
+          <li><strong>Mutual Funds:</strong> ₹40,000</li>
+          <li><strong>Returns:</strong> +8.5%</li>
+          <li><strong>Top Stock:</strong> TCS</li>
+        </ul>
+      </div>
+      <div class="portfolio-box motilal-portfolio">
+        <h2>Motilal Oswal Portfolio Analysis</h2>
+        <ul>
+          <li><strong>Equity:</strong> ₹90,000</li>
+          <li><strong>Mutual Funds:</strong> ₹60,000</li>
+          <li><strong>Returns:</strong> +6.2%</li>
+          <li><strong>Top Stock:</strong> Reliance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT SECTION -->
+  <script>
+    // STOCK SIMULATION DATA
+    const stocks = [
+      { name: 'TCS', price: 3545 },
+      { name: 'Infosys', price: 1487 },
+      { name: 'Reliance', price: 2630 },
+      { name: 'HDFC Bank', price: 1660 },
+      { name: 'Adani Ports', price: 1160 },
+      { name: 'Wipro', price: 520 }
+    ];
+
+    function getRandomChange() {
+      return (Math.random() * 20 - 10).toFixed(2); // +/-10 max change
+    }
+
+    function updateStockSection(elementId) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = ''; // Clear previous data
+
+      stocks.forEach(stock => {
+        const change = getRandomChange();
+        const newPrice = (stock.price + parseFloat(change)).toFixed(2);
+        const color = change >= 0 ? 'green' : 'red';
+
+        const stockItem = document.createElement('div');
+        stockItem.classList.add('stock-item');
+        stockItem.innerHTML = `
+          <strong>${stock.name}</strong>: ₹${newPrice} 
+          <span style="color: ${color};">(${change >= 0 ? '+' : ''}${change})</span>
+        `;
+        container.appendChild(stockItem);
+      });
+    }
+
+    setInterval(() => {
+      updateStockSection('zerodha-stock-updates');
+      updateStockSection('motilal-stock-updates');
+    }, 3000);
+
+    // DARK / LIGHT THEME TOGGLE
+    const toggleButton = document.getElementById('theme-toggle');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>
+<footer class="footer">
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Market News</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Support</h3>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="#">Real-time Tracking</a></li>
+        <li><a href="#">Stock Analysis</a></li>
+        <li><a href="#">News Feed</a></li>
+        <li><a href="#">Recommendations</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contact-info">
+      <h3>Contact Us</h3>
+      <p><strong>Phone:</strong> 1234567988</p>
+      <p><strong>Email:</strong> <a href="mailto:stock@gmail.com">stock@gmail.com</a></p>
+      <p><strong>Address:</strong><br>
+        2nd floor, Stock Centre,<br>
+        Sky Homes, Noida Sector 66,<br>
+        201301
+      </p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
